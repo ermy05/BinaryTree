@@ -12,10 +12,10 @@ TreeNode* createTreeFromFile(string file);
 
 int main()
 {
-	std::string path = DATA_DIR;
+	std::string filePath = DATA_DIR;
 
 	TreeNode* head;
-	head = createTreeFromFile(path + "tree.txt");
+	head = createTreeFromFile(filePath + "tree.txt");
 
 	head->printTree(0);
 	return 0;
