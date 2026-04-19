@@ -15,9 +15,24 @@ int main()
 	std::string filePath = DATA_DIR;
 
 	TreeNode* head;
-	head = createTreeFromFile(filePath + "tree.txt");
+	head = createTreeFromFile(filePath + "search-tree.txt");
+
+	TreeNode* subtree;
+	subtree = createTreeFromFile(filePath + "subtree.txt");
 
 	head->printTree(0);
+	head->findSingleValue(30);
+	head->findSingleValue(22);
+	subtree->printTree(0);
+
+
+	std::cout << std::endl;
+	if (head->subtreeCheck(subtree)) {
+		std::cout << "Subtree found" << std::endl;
+	}
+	else {
+		std::cout << "Subtree NOT found" << std::endl;
+	}
 	return 0;
 }
 

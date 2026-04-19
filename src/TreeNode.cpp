@@ -58,3 +58,62 @@ void TreeNode::printTree(int depth) {
 		this->rightNode->printTree(depth + 1);
 	}
 }
+
+void TreeNode::findSingleValue(int target) {
+	if (this->value == target) {
+		std::cout << "Target found: " << target << std::endl;
+	}
+
+	if (this->value > target) {
+		if (this->leftNode == nullptr) {
+			return;
+		}
+		else {
+			this->leftNode->findSingleValue(target);
+			std::cout << this->leftNode->value << " -> ";
+		}
+	}
+	if (this->value < target) {
+		if (this->rightNode == nullptr) {
+			return;
+		}
+		else {
+			this->rightNode->findSingleValue(target);
+			std::cout << this->rightNode->value << " -> ";
+		}
+	}
+}
+
+bool TreeNode::isSubtree(TreeNode* subtree) {
+	if (this == nullptr && subtree == nullptr) {
+		return true;
+	}
+	if (this != nullptr && subtree == nullptr) {
+		return true;
+	}
+	if (this == nullptr || subtree == nullptr) {
+		return false;
+	}
+	if (this->getValue() != subtree->getValue()) {
+		return this->leftNode->isSubtree(subtree) || this->rightNode->isSubtree(subtree);
+	}
+
+	return (this->getValue() == subtree->getValue()) &&
+		this->leftNode->isSubtree(subtree->leftNode) &&
+		this->rightNode->isSubtree(subtree->rightNode);
+}
+
+bool TreeNode::subtreeCheck(TreeNode* subtree) {
+	if (subtree == nullptr) {
+		return true;
+	}
+	if (this == nullptr) {
+		return false;
+	}
+
+	if (this->isSubtree(subtree)) {
+		return true;
+	}
+
+	return this->leftNode->subtreeCheck(subtree) || this->rightNode->subtreeCheck(subtree);
+}
