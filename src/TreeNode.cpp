@@ -59,27 +59,32 @@ void TreeNode::printTree(int depth) {
 	}
 }
 
-void TreeNode::findSingleValue(int target) {
+void TreeNode::findSingleValue(int target, std::string path) {
+	path += std::to_string(this->value);
+
 	if (this->value == target) {
-		std::cout << "Target found: " << target << std::endl;
+		std::cout << "Target found: " << target << ", with path: " << path << std::endl;
+		return;
 	}
+
+	path += " -> ";
 
 	if (this->value > target) {
 		if (this->leftNode == nullptr) {
+			std::cout << "Target not found " << std::endl;
 			return;
 		}
 		else {
-			this->leftNode->findSingleValue(target);
-			std::cout << this->leftNode->value << " -> ";
+			this->leftNode->findSingleValue(target, path);
 		}
 	}
 	if (this->value < target) {
 		if (this->rightNode == nullptr) {
+			std::cout << "Target not found " << std::endl;
 			return;
 		}
 		else {
-			this->rightNode->findSingleValue(target);
-			std::cout << this->rightNode->value << " -> ";
+			this->rightNode->findSingleValue(target, path);
 		}
 	}
 }

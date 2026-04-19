@@ -20,10 +20,10 @@ int main()
 	TreeNode* subtree;
 	subtree = createTreeFromFile(filePath + "subtree.txt");
 
-	head->printTree(0);
-	head->findSingleValue(30);
-	head->findSingleValue(22);
-	subtree->printTree(0);
+	//head->printTree(0);
+	head->findSingleValue(30, "");
+	head->findSingleValue(22, "");
+	//subtree->printTree(0);
 
 
 	std::cout << std::endl;

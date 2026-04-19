@@ -1,4 +1,7 @@
 #pragma once
+
+#include <string>
+
 class TreeNode {
 private:
 	int value;
@@ -8,7 +11,7 @@ public:
 	TreeNode(int value);
 	void addNode(TreeNode* node);
 	TreeNode* findNode(int target);
-	void findSingleValue(int target);
+	void findSingleValue(int target, std::string path);
 
 	bool isSubtree(TreeNode* subtree);
 	bool subtreeCheck(TreeNode* subtree);
