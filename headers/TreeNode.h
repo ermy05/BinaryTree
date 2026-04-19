@@ -8,7 +8,11 @@ public:
 	TreeNode(int value);
 	void addNode(TreeNode* node);
 	TreeNode* findNode(int target);
-	//bool isSubTree(TreeNode* mainTree);
+	void findSingleValue(int target);
+
+	bool isSubtree(TreeNode* subtree);
+	bool subtreeCheck(TreeNode* subtree);
+
 	int getValue();
 	void printTree(int depth);
 };
