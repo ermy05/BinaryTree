@@ -4,6 +4,7 @@
 #include "headers/TreeNode.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -14,25 +15,72 @@ int main()
 {
 	std::string filePath = DATA_DIR;
 
-	TreeNode* head;
-	head = createTreeFromFile(filePath + "search-tree.txt");
+	TreeNode* head = nullptr;
+	TreeNode* subtree = nullptr;
 
-	TreeNode* subtree;
-	subtree = createTreeFromFile(filePath + "subtree.txt");
+	while (true) {
+		std::string input;
+		std::cout << std::endl;
+		std::cout << "Tree Tool Ready. Commands:" << std::endl;
+		std::cout << "1. treecheck <file> (check if file1 is avl tree)" << std::endl;
+		std::cout << "2. treecheck <file1> <file2> (check if file1 contains file2)" << std::endl;
+		std::cout << "3. search <file1> <value>(check if file1 contains value)" << std::endl;
+		std::cout << "4. exit" << std::endl;
+		std::cout << std::endl;
+		if (!std::getline(std::cin, input) || input == "exit") break;
 
-	//head->printTree(0);
-	head->findSingleValue(30, "");
-	head->findSingleValue(22, "");
-	//subtree->printTree(0);
+		std::stringstream ss(input);
+		std::string command, file1, file2;
+		int targetValue;
 
+		ss >> command;
 
-	std::cout << std::endl;
-	if (head->subtreeCheck(subtree)) {
-		std::cout << "Subtree found" << std::endl;
+		if (command == "treecheck") {
+			ss >> file1;
+			head = createTreeFromFile(filePath + file1 + ".txt");
+			if (head == nullptr) {
+				continue;
+			}
+			if (ss >> file2) {
+				subtree = createTreeFromFile(filePath + file2 + ".txt");
+				if (subtree == nullptr) {
+					continue;
+				}
+				std::cout << "Action: Checking subtree " << file1 << std::endl;
+				if (head->isSubtree(subtree)) {
+					cout << "SubTree found in tree" << std::endl;
+				}
+				else {
+					cout << "SubTree not found in tree" << std::endl;
+				}
+			}
+			else {
+				std::cout << "Action: Checking tree " << file1 << std::endl;
+				head->printTree(0);
+			}
+		}
+		else if (command == "search") {
+			ss >> file1;
+			head = createTreeFromFile(filePath + file1 + ".txt");
+			if (head == nullptr) {
+				continue;
+			}
+			if (ss >> targetValue) {
+				std::cout << "Action: Searching for " << targetValue << " in " << file1 << std::endl;
+				head->findSingleValue(targetValue, "");
+			}
+		}
+		else {
+			std::cout << "Unknown command. Try 'treecheck'." << std::endl;
+		}
+		delete head;
+		delete subtree;
+		head = nullptr;
+		subtree = nullptr;
 	}
-	else {
-		std::cout << "Subtree NOT found" << std::endl;
-	}
+
+	return 0;
+
 	return 0;
 }
 

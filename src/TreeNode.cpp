@@ -7,6 +7,11 @@ TreeNode::TreeNode(int value) {
 	this->value = value;
 }
 
+TreeNode::~TreeNode() {
+	delete this->leftNode;
+	delete this->rightNode;
+}
+
 void TreeNode::addNode(TreeNode* node) {
 	if (node->getValue() > this->getValue()) {
 		if (this->rightNode == nullptr) {

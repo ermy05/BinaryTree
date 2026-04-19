@@ -9,6 +9,7 @@ private:
 	TreeNode* rightNode;
 public:
 	TreeNode(int value);
+	~TreeNode();
 	void addNode(TreeNode* node);
 	TreeNode* findNode(int target);
 	void findSingleValue(int target, std::string path);
