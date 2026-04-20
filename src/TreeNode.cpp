@@ -127,3 +127,51 @@ bool TreeNode::subtreeCheck(TreeNode* subtree) {
 
 	return this->leftNode->subtreeCheck(subtree) || this->rightNode->subtreeCheck(subtree);
 }
+
+int TreeNode::getHeigth() {
+	if (this == nullptr) { return 0; }
+
+	int leftHeight = (this->leftNode == nullptr) ? 0 : this->leftNode->getHeigth();
+	int rightHeight = (this->rightNode == nullptr) ? 0 : this->rightNode->getHeigth();
+
+	return 1 + std::max(leftHeight, rightHeight);
+}
+
+
+int TreeNode::getBalanceFactor() {
+	if (this == nullptr) { return 0; }
+
+	int leftHeight = (this->leftNode == nullptr) ? 0 : this->leftNode->getHeigth();
+	int rightHeight = (this->rightNode == nullptr) ? 0 : this->rightNode->getHeigth();
+	std::cout << "bal(" << this->getValue() << ") = " << leftHeight - rightHeight << std::endl;
+	return leftHeight - rightHeight;
+}
+
+int TreeNode::getSum() {
+	if (this == nullptr) return 0;
+	int sum = this->value;
+	if (this->leftNode != nullptr) sum += this->leftNode->getSum();
+	if (this->rightNode != nullptr) sum += this->rightNode->getSum();
+	return sum;
+}
+
+int TreeNode::getNodeCount() {
+	if (this == nullptr) return 0;
+	int count = 1;
+	if (this->leftNode != nullptr) count += this->leftNode->getNodeCount();
+	if (this->rightNode != nullptr) count += this->rightNode->getNodeCount();
+	return count;
+}
+
+int TreeNode::getMinValue() {
+	TreeNode* current = this;
+
+	while (current->leftNode != nullptr) { current = current->leftNode; }
+	return current->getValue();
+}
+
+int TreeNode::getMaxValue() {
+	TreeNode* current = this;
+	while (current->rightNode != nullptr) { current = current->rightNode; }
+	return current->getValue();
+}

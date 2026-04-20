@@ -17,6 +17,14 @@ public:
 	bool isSubtree(TreeNode* subtree);
 	bool subtreeCheck(TreeNode* subtree);
 
+	int getHeigth();
+	int getBalanceFactor();
+
+	int getSum();
+	int getNodeCount();
+	int getMinValue();
+	int getMaxValue();
+
 	int getValue();
 	void printTree(int depth);
 };

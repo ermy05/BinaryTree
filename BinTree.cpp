@@ -57,6 +57,8 @@ int main()
 			else {
 				std::cout << "Action: Checking tree " << file1 << std::endl;
 				head->printTree(0);
+				std::cout << head->getBalanceFactor() << std::endl;
+				std::cout << "min: " << head->getMinValue() << ", max: " << head->getMaxValue() << ", avg: " << static_cast<float>(head->getSum()) / static_cast<float>(head->getNodeCount()) << std::endl;
 			}
 		}
 		else if (command == "search") {
