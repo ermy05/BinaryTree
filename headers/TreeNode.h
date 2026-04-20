@@ -19,6 +19,7 @@ public:
 
 	int getHeigth();
 	int getBalanceFactor();
+	int getBalanceFactor(TreeNode* next);
 
 	int getSum();
 	int getNodeCount();

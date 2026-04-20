@@ -143,7 +143,10 @@ int TreeNode::getBalanceFactor() {
 
 	int leftHeight = (this->leftNode == nullptr) ? 0 : this->leftNode->getHeigth();
 	int rightHeight = (this->rightNode == nullptr) ? 0 : this->rightNode->getHeigth();
-	std::cout << "bal(" << this->getValue() << ") = " << leftHeight - rightHeight << std::endl;
+
+	std::cout << "bal(" << this->getValue() << ") = " << leftHeight - rightHeight << ((std::abs(leftHeight - rightHeight)>1) ? " (AVL violation!)" : "") << std::endl;
+	(this->leftNode == nullptr) ? 0 : this->leftNode->getBalanceFactor();
+	(this->rightNode == nullptr) ? 0 : this->rightNode->getBalanceFactor();
 	return leftHeight - rightHeight;
 }
 
