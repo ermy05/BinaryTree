@@ -1,6 +1,8 @@
 #include "headers/TreeNode.h"
 #include <iostream>
 
+bool TreeNode::isAVLTree = true;
+
 TreeNode::TreeNode(int value) {
 	this->leftNode = nullptr;
 	this->rightNode = nullptr;
@@ -144,9 +146,14 @@ int TreeNode::getBalanceFactor() {
 	int leftHeight = (this->leftNode == nullptr) ? 0 : this->leftNode->getHeigth();
 	int rightHeight = (this->rightNode == nullptr) ? 0 : this->rightNode->getHeigth();
 
-	std::cout << "bal(" << this->getValue() << ") = " << leftHeight - rightHeight << ((std::abs(leftHeight - rightHeight)>1) ? " (AVL violation!)" : "") << std::endl;
-	(this->leftNode == nullptr) ? 0 : this->leftNode->getBalanceFactor();
 	(this->rightNode == nullptr) ? 0 : this->rightNode->getBalanceFactor();
+	(this->leftNode == nullptr) ? 0 : this->leftNode->getBalanceFactor();
+	std::cout << "bal(" << this->getValue() << ") = " << leftHeight - rightHeight << ((std::abs(leftHeight - rightHeight)>1) ? " (AVL violation!)" : "") << std::endl;
+
+	if (std::abs(leftHeight - rightHeight) > 1) {
+		setIsAVLTreeFalse();
+	}
+
 	return leftHeight - rightHeight;
 }
 
@@ -177,4 +184,12 @@ int TreeNode::getMaxValue() {
 	TreeNode* current = this;
 	while (current->rightNode != nullptr) { current = current->rightNode; }
 	return current->getValue();
+}
+
+void TreeNode::setIsAVLTreeFalse() {
+	isAVLTree = false;
+}
+
+bool TreeNode::getIsAVLTree() {
+	return isAVLTree;
 }

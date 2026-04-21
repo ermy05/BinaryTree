@@ -7,6 +7,7 @@ private:
 	int value;
 	TreeNode* leftNode;
 	TreeNode* rightNode;
+	static bool isAVLTree;
 public:
 	TreeNode(int value);
 	~TreeNode();
@@ -19,7 +20,6 @@ public:
 
 	int getHeigth();
 	int getBalanceFactor();
-	int getBalanceFactor(TreeNode* next);
 
 	int getSum();
 	int getNodeCount();
@@ -28,5 +28,8 @@ public:
 
 	int getValue();
 	void printTree(int depth);
+
+	void setIsAVLTreeFalse();
+	bool getIsAVLTree();
 };
 
