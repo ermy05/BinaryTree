@@ -14,6 +14,9 @@ TreeNode::~TreeNode() {
 	delete this->rightNode;
 }
 
+/*
+O(log(n))
+*/
 void TreeNode::addNode(TreeNode* node) {
 	if (node->getValue() > this->getValue()) {
 		if (this->rightNode == nullptr) {
@@ -33,6 +36,9 @@ void TreeNode::addNode(TreeNode* node) {
 	}
 }
 
+/*
+O(log(n)) -> Pro Durchlauf wird der Suchumfang halbiert
+*/
 TreeNode* TreeNode::findNode(int target) {
 	if (this->value == target) {
 		return this;
@@ -52,10 +58,16 @@ TreeNode* TreeNode::findNode(int target) {
 	}
 }
 
+/*
+O(1)
+*/
 int TreeNode::getValue() {
 	return this->value;
 }
 
+/*
+O(n) -> Pro Durchlauf wird der Suchumfang halbiert
+*/
 void TreeNode::printTree(int depth) {
 	std::cout << std::string(depth, '|') << this->getValue() << std::endl;
 	if (this->leftNode != nullptr) {
@@ -66,6 +78,9 @@ void TreeNode::printTree(int depth) {
 	}
 }
 
+/*
+O(log(n)) -> Pro Durchlauf wird der Suchumfang halbiert
+*/
 void TreeNode::findSingleValue(int target, std::string path) {
 	path += std::to_string(this->value);
 
@@ -96,6 +111,9 @@ void TreeNode::findSingleValue(int target, std::string path) {
 	}
 }
 
+/*
+O(n * m) -> n = this tree size, m = subtree size
+*/
 bool TreeNode::isSubtree(TreeNode* subtree) {
 	if (this == nullptr && subtree == nullptr) {
 		return true;
@@ -115,6 +133,9 @@ bool TreeNode::isSubtree(TreeNode* subtree) {
 		this->rightNode->isSubtree(subtree->rightNode);
 }
 
+/*
+Worst Case: O(n^2 * m) -> Mit balanced Tree: O(n*m*log(n))
+*/
 bool TreeNode::subtreeCheck(TreeNode* subtree) {
 	if (subtree == nullptr) {
 		return true;
@@ -130,6 +151,9 @@ bool TreeNode::subtreeCheck(TreeNode* subtree) {
 	return this->leftNode->subtreeCheck(subtree) || this->rightNode->subtreeCheck(subtree);
 }
 
+/*
+O(n) -> Es wird über jeden node gegangen und die Height wird aufgerufen
+*/
 int TreeNode::getHeigth() {
 	if (this == nullptr) { return 0; }
 
@@ -139,7 +163,9 @@ int TreeNode::getHeigth() {
 	return 1 + std::max(leftHeight, rightHeight);
 }
 
-
+/*
+O(n^2) -> für jeden Node muss rekursiv die Höhe geprüft (height könnte gecached werden)
+*/
 int TreeNode::getBalanceFactor() {
 	if (this == nullptr) { return 0; }
 
@@ -157,6 +183,9 @@ int TreeNode::getBalanceFactor() {
 	return leftHeight - rightHeight;
 }
 
+/*
+O(n) -> in jedem Fall wird der gesamte Baum durchgegangen
+*/
 int TreeNode::getSum() {
 	if (this == nullptr) return 0;
 	int sum = this->value;
@@ -165,6 +194,9 @@ int TreeNode::getSum() {
 	return sum;
 }
 
+/*
+O(n) -> in jedem Fall wird der gesamte Baum durchgegangen
+*/
 int TreeNode::getNodeCount() {
 	if (this == nullptr) return 0;
 	int count = 1;
@@ -173,6 +205,9 @@ int TreeNode::getNodeCount() {
 	return count;
 }
 
+/*
+O(log(n)) -> Pro Durchlauf wird der Suchumfang halbiert
+*/
 int TreeNode::getMinValue() {
 	TreeNode* current = this;
 
@@ -180,6 +215,9 @@ int TreeNode::getMinValue() {
 	return current->getValue();
 }
 
+/*
+log(n) -> Pro Durchlauf wird der Suchumfang halbiert
+*/
 int TreeNode::getMaxValue() {
 	TreeNode* current = this;
 	while (current->rightNode != nullptr) { current = current->rightNode; }
